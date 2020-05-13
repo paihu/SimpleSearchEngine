@@ -1,4 +1,5 @@
 package search
+import java.io.File
 
 class SearchEngine(val peoples: List<String>) {
     val menu = listOf("Find a person", "Print all people", "Exit")
@@ -16,14 +17,9 @@ class SearchEngine(val peoples: List<String>) {
         return peoples.filter { v-> v.toUpperCase().contains(searchWord.toUpperCase())}
     }
 }
-
-fun main() {
-    println("Enter all people:")
-    val numPeoples = readLine()!!.toInt()
-    val peoples: MutableList<String> = mutableListOf()
-    for ( i in 1..numPeoples){
-        peoples.add(readLine()!!)
-    }
+fun main(args: Array<String>) {
+    val fileName = args[1]
+    val peoples = File(fileName).readLines()
     val searchEngine = SearchEngine(peoples)
     loop@ do {
        searchEngine.printMenu()
